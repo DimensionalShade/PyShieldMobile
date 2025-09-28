@@ -14,5 +14,5 @@ jobs:
 
     - name: Build APK in Docker
       run: |
-        docker run --rm -v $PWD:/app kivy/buildozer:python3.10 \
+        docker run --rm -v $PWD:/app kivy/buildozer:latest \
           buildozer -v android debug
