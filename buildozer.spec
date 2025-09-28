@@ -10,6 +10,9 @@ package.name = pyshieldmobile
 # (str) Package domain (needed for android/ios packaging)
 package.domain = org.dima
 
+# (str) Override path to Android SDK (used in CI to locate manually installed build-tools and aidl)
+android.sdk_path = /home/runner/android-sdk
+
 # (str) Source code where the main.py live
 source.dir = .
 
@@ -100,7 +103,7 @@ fullscreen = 0
 
 # (int) Target Android API, should be as high as possible.
 android.api = 33
-
+android.sdk = 33
 # (int) Minimum API your APK / AAB will support.
 android.minapi = 21
 
