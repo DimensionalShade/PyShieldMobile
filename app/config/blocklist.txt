@@ -1,0 +1,4 @@
+facebook.com
+google-analytics.com
+api.tracker.net
+192.168.0.1

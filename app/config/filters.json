@@ -1,0 +1,6 @@
+{
+  "enable_blocklist": true,
+  "enable_ip_filter": true,
+  "enable_port_filter": true,
+  "enable_protocol_filter": true
+}
