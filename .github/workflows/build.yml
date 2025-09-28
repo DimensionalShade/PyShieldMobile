@@ -13,13 +13,13 @@ jobs:
       PATH: $HOME/.buildozer/android/platform/android-sdk/cmdline-tools/latest/bin:$HOME/.buildozer/android/platform/android-sdk/platform-tools:$PATH
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v3
-
     - name: Install system dependencies
       run: |
         sudo apt-get update
-        sudo apt-get install -y zlib1g-dev libncurses-dev libffi-dev libssl-dev libsqlite3-dev libjpeg-dev build-essential unzip openjdk-17-jdk git
+        sudo apt-get install -y tar zlib1g-dev libncurses-dev libffi-dev libssl-dev libsqlite3-dev libjpeg-dev build-essential unzip openjdk-17-jdk git
+
+    - name: Checkout code
+      uses: actions/checkout@v3
 
     - name: Install pip dependencies
       run: pip install --user buildozer cython
