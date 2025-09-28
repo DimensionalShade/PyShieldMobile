@@ -25,6 +25,10 @@ jobs:
         run: |
           pip install buildozer
 
+      - name: Install Cython
+        run: |
+          pip install cython
+
       - name: Install Android cmdline-tools
         run: |
           mkdir -p $ANDROID_HOME/cmdline-tools
