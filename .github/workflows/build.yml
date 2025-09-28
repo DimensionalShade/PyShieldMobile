@@ -27,16 +27,16 @@ jobs:
 
     - name: Install Android SDK
       run: |
-        mkdir -p /data/data/com.termux/files/home/android-sdk
-        yes | sdkmanager --sdk_root=/data/data/com.termux/files/home/android-sdk "platform-tools" "platforms;android-33" "build-tools;33.0.2" "ndk;25.2.9519653"
+        mkdir -p $HOME/android-sdk
+        yes | sdkmanager --sdk_root=$HOME/android-sdk "platform-tools" "platforms;android-33" "build-tools;33.0.2" "ndk;25.2.9519653"
 
     - name: Set environment variables
       run: |
-        echo "ANDROIDSDK=/data/data/com.termux/files/home/android-sdk" >> 
-        echo "ANDROIDNDK=/data/data/com.termux/files/home/android-sdk/ndk/25.2.9519653" >> 
+        echo "ANDROIDSDK=$HOME/android-sdk" >> 
+        echo "ANDROIDNDK=$HOME/android-sdk/ndk/25.2.9519653" >> 
 
     - name: Build APK
       run: |
-        export ANDROIDSDK=/data/data/com.termux/files/home/android-sdk
-        export ANDROIDNDK=/data/data/com.termux/files/home/android-sdk/ndk/25.2.9519653
+        export ANDROIDSDK=$HOME/android-sdk
+        export ANDROIDNDK=$HOME/android-sdk/ndk/25.2.9519653
         buildozer android debug
