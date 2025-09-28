@@ -27,7 +27,7 @@ jobs:
         mv $HOME/android-sdk/cmdline-tools/cmdline-tools $HOME/android-sdk/cmdline-tools/latest
         export PATH=$HOME/android-sdk/cmdline-tools/latest/bin:$PATH
         yes | sdkmanager --sdk_root=$HOME/android-sdk \"platform-tools\" \"platforms;android-33\" \"build-tools;33.0.2\" \"ndk;25.2.9519653\"
-      run: |
+
         sudo apt-get update
         sudo apt-get install -y zlib1g-dev libncurses-dev libffi-dev libssl-dev libsqlite3-dev libjpeg-dev build-essential unzip openjdk-17-jdk
 
@@ -35,7 +35,6 @@ jobs:
       run: pip install buildozer
 
     - name: Install Android SDK
-      run: |
         mkdir -p $HOME/android-sdk
         yes | sdkmanager --sdk_root=$HOME/android-sdk "platform-tools" "platforms;android-33" "build-tools;33.0.2" "ndk;25.2.9519653"
 
