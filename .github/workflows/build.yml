@@ -15,8 +15,8 @@ jobs:
     steps:
     - name: Install system dependencies
       run: |
-        sudo apt-get update
-        sudo apt-get install -y tar zlib1g-dev libncurses-dev libffi-dev libssl-dev libsqlite3-dev libjpeg-dev build-essential unzip openjdk-17-jdk git
+        apt-get update
+        apt-get install -y tar zlib1g-dev libncurses-dev libffi-dev libssl-dev libsqlite3-dev libjpeg-dev build-essential unzip openjdk-17-jdk git
 
     - name: Checkout code
       uses: actions/checkout@v3
