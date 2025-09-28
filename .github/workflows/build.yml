@@ -21,6 +21,7 @@ jobs:
       run: |
         sudo apt update
         sudo apt install -y build-essential libffi-dev libssl-dev python3-pip python3-setuptools python3-wheel git zip unzip openjdk-17-jdk
+        pip install cython
         pip install buildozer
 
     - name: Build APK
