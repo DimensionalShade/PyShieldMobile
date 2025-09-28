@@ -1,58 +1,28 @@
 [app]
-
-# (str) Title of your application
 title = PyShieldMobile
-
-# (str) Package name
 package.name = pyshieldmobile
-
-# (str) Package domain (needed for android/ios packaging)
-package.domain = org.dima
-
-# (str) Override path to Android SDK (used in CI to locate manually installed build-tools and aidl)
-android.sdk_path = /home/runner/android-sdk
-
-# (str) Override path to Android NDK (used in CI to avoid auto-download issues)
-android.ndk_path = /home/runner/.buildozer/android/platform/android-ndk-r25b
-
-# (int) Target Android API, should be as high as possible
-android.api = 33
-
-# (int) Minimum API your APK will support
-android.minapi = 21
-
-# (str) Android SDK version to use
-android.sdk = 33
-
-# (str) Android NDK version to use
-android.ndk = 25b
-
-# (str) Source code where the main.py live
+package.domain = org.dimshade
+source.include_exts = py,png,jpg,kv,atlas
 source.dir = .
-
-# (str) Entry point of your app
-source.main = main.py
-
-# (str) Application versioning (used in APK metadata)
-version = 1.0.0
-
-# (list) Permissions your app requires
-android.permissions = INTERNET
-
-# (str) Supported orientation (one of: landscape, portrait or all)
+version = 0.1
+requirements = python3,kivy
 orientation = portrait
+fullscreen = 1
+osx.python_version = 3
+osx.kivy_version = 2.1.0
 
-# (bool) Indicate if the application should be fullscreen or not
-fullscreen = 0
-
-# (str) Presplash image path (optional)
-presplash.filename = %(source.dir)s/data/presplash.png
-
-# (str) Icon image path (optional)
-icon.filename = %(source.dir)s/data/icon.png
-
-# (str) Supported architectures
+[buildozer]
+log_level = 2
+warn_on_root = 1
+android.api = 33
+android.minapi = 21
+android.ndk = 25b
+android.ndk_api = 21
 android.archs = armeabi-v7a, arm64-v8a
-
-# (str) Package format (apk, aab)
-android.package_format = apk
+android.bootstrap = sdl2
+android.allow_backup = 0
+android.support = 1
+android.enable_androidx = 1
+android.gradle_dependencies = 
+android.sdk_path = /home/runner/android-sdk
+android.ndk_path = /home/runner/.buildozer/android/platform/android-ndk-r25b
