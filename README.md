@@ -29,3 +29,4 @@ This project is released under a reproducible, auditable license.
 See `LICENSE.md` and `EXPORT.md` for full compliance details.
 # Trigger build
 # Trigger build with sdk_path fix
+# Trigger build with final sdkmanager fix
