@@ -49,3 +49,10 @@ jobs:
         ANDROIDNDK: ${{ env.ANDROIDNDK }}
       run: |
         buildozer android debug
+
+    - name: Install Android build-tools for Buildozer
+      run: |
+        mkdir -p $HOME/.buildozer/android/platform/android-sdk
+        ln -s $HOME/android-sdk/cmdline-tools/latest $HOME/.buildozer/android/platform/android-sdk/build-tools
+        yes | sdkmanager --sdk_root=$HOME/.buildozer/android/platform/android-sdk "build-tools;33.0.2" "platform-tools" "platforms;android-33"
+        yes | sdkmanager --sdk_root=$HOME/.buildozer/android/platform/android-sdk --licenses
