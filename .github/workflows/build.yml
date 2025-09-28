@@ -27,15 +27,15 @@ jobs:
     - name: Install pip dependencies
       run: pip install --upgrade pip && pip install buildozer cython
 
-    - name: Install Android cmdline-tools
+    - name: Install Android cmdline-tools and SDK packages
       run: |
         mkdir -p $HOME/android-sdk/cmdline-tools
         curl -o commandlinetools.zip https://dl.google.com/android/repository/commandlinetools-linux-9477386_latest.zip
         unzip -q commandlinetools.zip -d $HOME/android-sdk/cmdline-tools
         mv $HOME/android-sdk/cmdline-tools/cmdline-tools $HOME/android-sdk/cmdline-tools/latest
         export PATH=$HOME/android-sdk/cmdline-tools/latest/bin:$PATH
-        yes | sdkmanager --sdk_root=$HOME/android-sdk \
-          "platform-tools" "platforms;android-33" "build-tools;33.0.2" "ndk;25.2.9519653"
+        yes | sdkmanager --sdk_root=$HOME/android-sdk "platform-tools" "platforms;android-33" "build-tools;33.0.2" "ndk;25.2.9519653"
+        yes | sdkmanager --sdk_root=$HOME/android-sdk --licenses
 
     - name: Set environment variables
       run: |
@@ -44,5 +44,8 @@ jobs:
         echo "PATH=$HOME/android-sdk/cmdline-tools/latest/bin:$HOME/android-sdk/platform-tools:$PATH" >> $GITHUB_ENV
 
     - name: Build APK
+      env:
+        ANDROIDSDK: ${{ env.ANDROIDSDK }}
+        ANDROIDNDK: ${{ env.ANDROIDNDK }}
       run: |
         buildozer android debug
