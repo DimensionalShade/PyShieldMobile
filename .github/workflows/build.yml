@@ -36,9 +36,10 @@ jobs:
           yes | sdkmanager --licenses
           sdkmanager "platform-tools" "platforms;android-33" "build-tools;33.0.2"
 
-      - name: Export sdkmanager path
+      - name: Symlink sdkmanager to legacy path
         run: |
-          echo "$ANDROID_HOME/cmdline-tools/latest/bin" >> $GITHUB_PATH
+          mkdir -p $ANDROID_HOME/tools/bin
+          ln -s $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager $ANDROID_HOME/tools/bin/sdkmanager
 
       - name: Build APK
         run: |
