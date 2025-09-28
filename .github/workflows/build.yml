@@ -27,12 +27,14 @@ jobs:
         mv $HOME/android-sdk/cmdline-tools/cmdline-tools $HOME/android-sdk/cmdline-tools/latest
         export PATH=$HOME/android-sdk/cmdline-tools/latest/bin:$PATH
         yes | sdkmanager --sdk_root=$HOME/android-sdk \"platform-tools\" \"platforms;android-33\" \"build-tools;33.0.2\" \"ndk;25.2.9519653\"
-    - name: Build APK
       run: |
         export ANDROIDSDK=$HOME/android-sdk
         export ANDROIDNDK=$HOME/android-sdk/ndk/25.2.9519653
         buildozer android debug
-    - name: Build APK
+      run: |
+        export ANDROIDSDK=$HOME/android-sdk
+        export ANDROIDNDK=$HOME/android-sdk/ndk/25.2.9519653
+        buildozer android debug
       run: |
         export ANDROIDSDK=$HOME/android-sdk
         export ANDROIDNDK=$HOME/android-sdk/ndk/25.2.9519653
@@ -47,12 +49,14 @@ jobs:
     - name: Install Android SDK
         mkdir -p $HOME/android-sdk
         yes | sdkmanager --sdk_root=$HOME/android-sdk "platform-tools" "platforms;android-33" "build-tools;33.0.2" "ndk;25.2.9519653"
-    - name: Build APK
       run: |
         export ANDROIDSDK=$HOME/android-sdk
         export ANDROIDNDK=$HOME/android-sdk/ndk/25.2.9519653
         buildozer android debug
-    - name: Build APK
+      run: |
+        export ANDROIDSDK=$HOME/android-sdk
+        export ANDROIDNDK=$HOME/android-sdk/ndk/25.2.9519653
+        buildozer android debug
       run: |
         export ANDROIDSDK=$HOME/android-sdk
         export ANDROIDNDK=$HOME/android-sdk/ndk/25.2.9519653
@@ -63,22 +67,18 @@ jobs:
         echo "ANDROIDSDK=$HOME/android-sdk" >> 
         echo "ANDROIDNDK=$HOME/android-sdk/ndk/25.2.9519653" >> 
 
-    - name: Build APK
       run: |
         export ANDROIDSDK=$HOME/android-sdk
         export ANDROIDNDK=$HOME/android-sdk/ndk/25.2.9519653
         buildozer android debug
-    - name: Build APK
       run: |
         export ANDROIDSDK=$HOME/android-sdk
         export ANDROIDNDK=$HOME/android-sdk/ndk/25.2.9519653
         buildozer android debug
-    - name: Build APK
       run: |
         export ANDROIDSDK=$HOME/android-sdk
         export ANDROIDNDK=$HOME/android-sdk/ndk/25.2.9519653
         buildozer android debug
-    - name: Build APK
       run: |
         export ANDROIDSDK=$HOME/android-sdk
         export ANDROIDNDK=$HOME/android-sdk/ndk/25.2.9519653
