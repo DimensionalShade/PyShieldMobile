@@ -23,11 +23,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          pip install buildozer
-
-      - name: Install Cython
-        run: |
-          pip install cython
+          pip install buildozer cython
 
       - name: Install Android cmdline-tools
         run: |
@@ -39,6 +35,10 @@ jobs:
           export PATH=$ANDROID_HOME/cmdline-tools/latest/bin:$PATH
           yes | sdkmanager --licenses
           sdkmanager "platform-tools" "platforms;android-33" "build-tools;33.0.2"
+
+      - name: Export sdkmanager path
+        run: |
+          echo "$ANDROID_HOME/cmdline-tools/latest/bin" >> $GITHUB_PATH
 
       - name: Build APK
         run: |
