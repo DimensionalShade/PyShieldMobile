@@ -1,4 +1,5 @@
 [app]
+p4a.local_recipes = ./recipes
 title = PyShieldMobile
 package.name = pyshieldmobile
 package.domain = org.dimshade
