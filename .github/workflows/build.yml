@@ -1,4 +1,4 @@
-name: Build PyShieldMobile
+name: Build APK
 
 on:
   push:
@@ -19,6 +19,12 @@ jobs:
 
     - name: Install system dependencies
       run: |
+        sudo apt-get update
+        sudo apt-get install -y zlib1g-dev libncurses-dev libffi-dev libssl-dev libsqlite3-dev libjpeg-dev build-essential unzip openjdk-17-jdk
+
+    - name: Install pip dependencies
+      run: pip install buildozer
+
     - name: Install Android cmdline-tools
       run: |
         mkdir -p $HOME/android-sdk/cmdline-tools
@@ -26,60 +32,14 @@ jobs:
         unzip commandlinetools.zip -d $HOME/android-sdk/cmdline-tools
         mv $HOME/android-sdk/cmdline-tools/cmdline-tools $HOME/android-sdk/cmdline-tools/latest
         export PATH=$HOME/android-sdk/cmdline-tools/latest/bin:$PATH
-        yes | sdkmanager --sdk_root=$HOME/android-sdk \"platform-tools\" \"platforms;android-33\" \"build-tools;33.0.2\" \"ndk;25.2.9519653\"
-      run: |
-        export ANDROIDSDK=$HOME/android-sdk
-        export ANDROIDNDK=$HOME/android-sdk/ndk/25.2.9519653
-        buildozer android debug
-      run: |
-        export ANDROIDSDK=$HOME/android-sdk
-        export ANDROIDNDK=$HOME/android-sdk/ndk/25.2.9519653
-        buildozer android debug
-      run: |
-        export ANDROIDSDK=$HOME/android-sdk
-        export ANDROIDNDK=$HOME/android-sdk/ndk/25.2.9519653
-        buildozer android debug
-
-        sudo apt-get update
-        sudo apt-get install -y zlib1g-dev libncurses-dev libffi-dev libssl-dev libsqlite3-dev libjpeg-dev build-essential unzip openjdk-17-jdk
-
-    - name: Install pip dependencies
-      run: pip install buildozer
-
-    - name: Install Android SDK
-        mkdir -p $HOME/android-sdk
         yes | sdkmanager --sdk_root=$HOME/android-sdk "platform-tools" "platforms;android-33" "build-tools;33.0.2" "ndk;25.2.9519653"
-      run: |
-        export ANDROIDSDK=$HOME/android-sdk
-        export ANDROIDNDK=$HOME/android-sdk/ndk/25.2.9519653
-        buildozer android debug
-      run: |
-        export ANDROIDSDK=$HOME/android-sdk
-        export ANDROIDNDK=$HOME/android-sdk/ndk/25.2.9519653
-        buildozer android debug
-      run: |
-        export ANDROIDSDK=$HOME/android-sdk
-        export ANDROIDNDK=$HOME/android-sdk/ndk/25.2.9519653
-        buildozer android debug
 
     - name: Set environment variables
       run: |
-        echo "ANDROIDSDK=$HOME/android-sdk" >> 
-        echo "ANDROIDNDK=$HOME/android-sdk/ndk/25.2.9519653" >> 
+        echo "ANDROIDSDK=$HOME/android-sdk" >> $GITHUB_ENV
+        echo "ANDROIDNDK=$HOME/android-sdk/ndk/25.2.9519653" >> $GITHUB_ENV
+        echo "PATH=$HOME/android-sdk/cmdline-tools/latest/bin:$HOME/android-sdk/platform-tools:$PATH" >> $GITHUB_ENV
 
+    - name: Build APK
       run: |
-        export ANDROIDSDK=$HOME/android-sdk
-        export ANDROIDNDK=$HOME/android-sdk/ndk/25.2.9519653
-        buildozer android debug
-      run: |
-        export ANDROIDSDK=$HOME/android-sdk
-        export ANDROIDNDK=$HOME/android-sdk/ndk/25.2.9519653
-        buildozer android debug
-      run: |
-        export ANDROIDSDK=$HOME/android-sdk
-        export ANDROIDNDK=$HOME/android-sdk/ndk/25.2.9519653
-        buildozer android debug
-      run: |
-        export ANDROIDSDK=$HOME/android-sdk
-        export ANDROIDNDK=$HOME/android-sdk/ndk/25.2.9519653
         buildozer android debug
