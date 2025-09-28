@@ -1,59 +1,41 @@
-name: Build APK
+name: Build PyShieldMobile APK
 
 on:
   push:
-    branches: [main]
+    branches:
+      - main
 
 jobs:
   build:
     runs-on: ubuntu-latest
 
+    env:
+      ANDROID_HOME: /home/runner/android-sdk
+
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v3
+      - name: Checkout repository
+        uses: actions/checkout@v3
 
-    - name: Set up Python
-      uses: actions/setup-python@v4
-      with:
-        python-version: '3.10'
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
 
-    - name: Install dependencies
-      run: |
-        sudo apt update
-        sudo apt install -y build-essential libffi-dev libssl-dev python3-pip python3-setuptools python3-wheel git zip unzip openjdk-17-jdk wget
-        pip install cython
-        pip install buildozer
+      - name: Install dependencies
+        run: |
+          pip install buildozer
 
-    - name: Install Android SDK
-      run: |
-        mkdir -p $HOME/android-sdk/cmdline-tools
-        cd $HOME/android-sdk/cmdline-tools
-        wget https://dl.google.com/android/repository/commandlinetools-linux-9477386_latest.zip -O sdk.zip
-        unzip sdk.zip
-        mv cmdline-tools latest
+      - name: Install Android cmdline-tools
+        run: |
+          mkdir -p $ANDROID_HOME/cmdline-tools
+          cd $ANDROID_HOME/cmdline-tools
+          curl -o commandlinetools.zip https://dl.google.com/android/repository/commandlinetools-linux-9477386_latest.zip
+          unzip -q commandlinetools.zip
+          mv cmdline-tools latest
+          export PATH=$ANDROID_HOME/cmdline-tools/latest/bin:$PATH
+          yes | sdkmanager --licenses
+          sdkmanager "platform-tools" "platforms;android-33" "build-tools;33.0.2"
 
-        export ANDROID_HOME=$HOME/android-sdk
-        export PATH=$ANDROID_HOME/cmdline-tools/latest/bin:$ANDROID_HOME/platform-tools:$ANDROID_HOME/emulator:$PATH
-
-        yes | $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager --sdk_root=${ANDROID_HOME} --licenses
-        $ANDROID_HOME/cmdline-tools/latest/bin/sdkmanager --sdk_root=${ANDROID_HOME} "platform-tools" "platforms;android-33"
-
-    - name: Manually install build-tools 33.0.2
-      run: |
-        mkdir -p $HOME/android-sdk/build-tools/33.0.2
-        cd $HOME/android-sdk/build-tools/33.0.2
-        wget https://dl.google.com/android/repository/build-tools_r33.0.2-linux.zip -O build-tools.zip
-        unzip build-tools.zip
-
-    - name: Build APK
-      run: |
-        export ANDROID_HOME=$HOME/android-sdk
-        export PATH=$ANDROID_HOME/build-tools/33.0.2:$ANDROID_HOME/platform-tools:$PATH
-        export USE_SDK_WRAPPER=0
-        buildozer android debug
-
-    - name: Upload APK
-      uses: actions/upload-artifact@v4
-      with:
-        name: PyShieldMobile-APK
-        path: bin/*.apk
+      - name: Build APK
+        run: |
+          buildozer android debug
