@@ -22,6 +22,7 @@ android.archs = armeabi-v7a, arm64-v8a
 android.bootstrap = sdl2
 android.allow_backup = 0
 android.support = 1
+android.build_tools_version = 33.0.2
 android.enable_androidx = 1
 android.gradle_dependencies = 
 android.sdk_path = /home/runner/android-sdk
