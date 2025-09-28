@@ -24,7 +24,7 @@ jobs:
         pip install cython
         pip install buildozer
 
-    - name: Install Android SDK and Build Tools
+    - name: Install Android SDK
       run: |
         mkdir -p $HOME/android-sdk/cmdline-tools
         cd $HOME/android-sdk/cmdline-tools
@@ -36,7 +36,14 @@ jobs:
         export PATH=$ANDROID_HOME/cmdline-tools/latest/bin:$ANDROID_HOME/platform-tools:$ANDROID_HOME/emulator:$PATH
 
         yes | sdkmanager --sdk_root=${ANDROID_HOME} --licenses
-        sdkmanager --sdk_root=${ANDROID_HOME} "platform-tools" "platforms;android-33" "build-tools;33.0.2"
+        sdkmanager --sdk_root=${ANDROID_HOME} "platform-tools" "platforms;android-33"
+
+    - name: Manually install build-tools 33.0.2
+      run: |
+        mkdir -p $HOME/android-sdk/build-tools/33.0.2
+        cd $HOME/android-sdk/build-tools/33.0.2
+        wget https://dl.google.com/android/repository/build-tools_r33.0.2-linux.zip -O build-tools.zip
+        unzip build-tools.zip
 
     - name: Build APK
       run: |
